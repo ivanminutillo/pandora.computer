@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
-import Donought from '@/components/donought'
+// import Donought from '@/components/donought'
 // we import types and typed-graphql document from the generated code (`..graphclient/`)
 import { TradesDocument, TradesQuery, execute } from '../.graphclient'
 import Image from "next/image"
