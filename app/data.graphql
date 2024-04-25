@@ -1,0 +1,42 @@
+query Trades ($creator: String!, $fromTimestamp: BigInt, $toTimestamp: BigInt, $first: Int) {
+    fpmmTrades(
+      where: {
+        type: Buy,
+        creator: $creator,
+        creationTimestamp_gte: $fromTimestamp,
+        creationTimestamp_lte: $toTimestamp
+      }
+      first: $first
+      orderDirection: asc
+    ) {
+      id
+      title
+      collateralToken
+      outcomeTokenMarginalPrice
+      oldOutcomeTokenMarginalPrice
+      type
+      creator {
+        id
+      }
+      creationTimestamp
+      collateralAmount
+      collateralAmountUSD
+      feeAmount
+      outcomeIndex
+      outcomeTokensTraded
+      transactionHash
+      fpmm {
+        id
+        outcomes
+        title
+        answerFinalizedTimestamp
+        currentAnswer
+        isPendingArbitration
+        arbitrationOccurred
+        openingTimestamp
+        condition {
+          id
+        }
+      }
+    }
+  }

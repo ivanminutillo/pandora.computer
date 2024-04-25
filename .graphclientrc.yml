@@ -1,0 +1,9 @@
+# .graphclientrc.yml
+sources:
+  - name: omenxdai
+    handler:
+      graphql:
+        endpoint: https://api.thegraph.com/subgraphs/name/protofire/omen-xdai
+        
+documents:
+  - ./app/data.graphql
