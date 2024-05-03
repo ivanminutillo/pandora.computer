@@ -20,7 +20,7 @@ function App() {
 
     <p>At first glance, this may not seem radically different from standard human-to-human interactions, right?</p>
 
-    <p>However, there are a few substantial differences: agents can work 24/7 non-stop and will be able to spawn new agents autonomously (if they have the right permissions). This will soon make humans a minority in most organizations (let's be conservative and assume one human for every ten agents).</p>
+    <p>However, there are a few substantial differences: agents can work 24/7 non-stop and will be able to spawn new agents autonomously (if they have the right permissions). This will soon make humans a minority in most organizations (let be conservative and assume one human for every ten agents).</p>
 
     <p>In this scenario, would a chat app be sufficient to manage such emergent complexity?</p>
     <p>How will you carry out your day-to-day work with an army of agents autonomously coordinating their activities at a speed you cannot match?</p>
