@@ -5948,7 +5948,7 @@ const merger = new(BareMerger as any)({
         store: rootStore.child('bareMerger')
       })
 const documentHashMap = {
-        "11a6bf1854e58f6c2efdfacccd59fe42f1f990c95b54dd9410ff9c69c3ff1bba": TradesDocument
+        c18c36a66277637a01d81a6fe3f13e2e3ae04cf5a85ab8416965ca46b566338a: TradesDocument
       }
 additionalEnvelopPlugins.push(usePersistedOperations({
         getPersistedOperation(key) {
@@ -5974,7 +5974,7 @@ additionalEnvelopPlugins.push(usePersistedOperations({
           return printWithCache(TradesDocument);
         },
         location: 'TradesDocument.graphql',
-        sha256Hash: '11a6bf1854e58f6c2efdfacccd59fe42f1f990c95b54dd9410ff9c69c3ff1bba'
+        sha256Hash: 'c18c36a66277637a01d81a6fe3f13e2e3ae04cf5a85ab8416965ca46b566338a'
       }
     ];
     },
@@ -6015,6 +6015,7 @@ export function getBuiltGraphSDK<TGlobalContext = any, TOperationContext = any>(
 }
 export type TradesQueryVariables = Exact<{
   creator: Scalars['String']['input'];
+  skip?: InputMaybe<Scalars['Int']['input']>;
   fromTimestamp?: InputMaybe<Scalars['BigInt']['input']>;
   toTimestamp?: InputMaybe<Scalars['BigInt']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -6031,10 +6032,11 @@ export type TradesQuery = { fpmmTrades: Array<(
 
 
 export const TradesDocument = gql`
-    query Trades($creator: String!, $fromTimestamp: BigInt, $toTimestamp: BigInt, $first: Int) {
+    query Trades($creator: String!, $skip: Int, $fromTimestamp: BigInt, $toTimestamp: BigInt, $first: Int) {
   fpmmTrades(
     where: {type: Buy, creator: $creator, creationTimestamp_gte: $fromTimestamp, creationTimestamp_lte: $toTimestamp}
     first: $first
+    skip: $skip
     orderDirection: asc
   ) {
     id

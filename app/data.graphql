@@ -1,4 +1,4 @@
-query Trades ($creator: String!, $fromTimestamp: BigInt, $toTimestamp: BigInt, $first: Int) {
+query Trades ($creator: String!, $skip: Int, $fromTimestamp: BigInt, $toTimestamp: BigInt, $first: Int) {
     fpmmTrades(
       where: {
         type: Buy,
@@ -7,6 +7,7 @@ query Trades ($creator: String!, $fromTimestamp: BigInt, $toTimestamp: BigInt, $
         creationTimestamp_lte: $toTimestamp
       }
       first: $first
+      skip: $skip
       orderDirection: asc
     ) {
       id

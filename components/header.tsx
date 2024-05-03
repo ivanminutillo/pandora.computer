@@ -1,23 +1,28 @@
+'use client'
+import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Package2, Menu, CircleUser } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 
 export function Header() {
+  const [input, setInput] = useState("");
     return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <nav className="flex-col gap-6 text-lg font-medium flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+    <header className="sticky relative top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <nav className="flex-col relative z-20 gap-6 text-lg font-medium flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link
-          href="#"
+          href="/"
           className="flex flex-1 items-center gap-2 text-lg font-semibold md:text-base"
         >
           <Image src="/logo.png" width={32} height={32} alt="Moloch.Computer" className="h-[3rem] w-[3rem]" />
-          <div className="max-w-[260px] flex-1">Pandora Computer</div>
+          <span>Pandora</span>
+          {/* <form className="w-full pl-2 " action={`/predict/${input}`}>
+            <Input className="w-full md:w-[420px]" type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type your agent Safe address..." />
+        </form> */}
         </Link>
+        {/* Add a search bar that takes the input value and redirect to /predict/[id] */}
+        
       </nav>
+      
       {/* <Sheet>
         <SheetTrigger asChild>
           <Button
@@ -68,22 +73,10 @@ export function Header() {
           </nav>
         </SheetContent>
       </Sheet> */}
-      <div className="md:flex hidden  justify-end w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-      <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Dashboard
-        </Link>
+      <div className="md:flex hidden relative z-20 justify-end w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Agents
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          href="/about"
+          className="text-muted-foreground text-sm transition-colors hover:text-foreground"
         >
           About
         </Link>
