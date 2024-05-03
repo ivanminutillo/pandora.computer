@@ -1,24 +1,11 @@
 'use client'
-import React, { useEffect } from 'react'
-// import Donought from '@/components/donought'
-// we import types and typed-graphql document from the generated code (`..graphclient/`)
-import { TradesDocument, TradesQuery, execute } from '../.graphclient'
-import Image from "next/image"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Separator } from '@/components/ui/separator'
-  
+import React from 'react'
+
 function App() {
   
   return (
-    <main className='max-w-screen-md mx-auto my-12'>
-      <div className='prose prose-md'>
+    <main className="max-w-screen-md mx-auto my-12">
+      <div className="prose prose-md">
         <h2>Toward Multi Agents co-owning Communities</h2>
         <h4>An ongoing experiment in designing new User Experiences for a multi agents world.</h4>
         <p>The messaging app is a crucial organization tool for most of the today companies, critical for fluent and direct communication among all the team members.
