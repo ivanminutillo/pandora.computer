@@ -247,7 +247,11 @@ function App() {
                         {market_status(trade) == "Closed" ? (
                           <div className='flex flex-col gap-1'>
                           <div>
-                            <Badge className='inline' variant="outline">{trade.fpmm.outcomes[trade.outcomeIndex]}</Badge>
+                          {trade.fpmm.outcomes && (
+  <Badge className='inline'>
+    {trade.fpmm.outcomes}
+  </Badge>
+)}
                           </div>
                           <span className='text-xs uppercase tracking-wider text-muted-foreground'>
                             Final result
