@@ -8,7 +8,7 @@ query Trades ($creator: String!, $skip: Int, $fromTimestamp: BigInt, $toTimestam
       }
       first: $first
       skip: $skip
-      orderDirection: asc
+      orderDirection: desc
     ) {
       id
       title
@@ -41,3 +41,57 @@ query Trades ($creator: String!, $skip: Int, $fromTimestamp: BigInt, $toTimestam
       }
     }
   }
+
+  query AllTrades ($creator: String!) {
+    fpmmTrades(
+      where: {
+        type: Buy,
+        creator: $creator,
+        }
+      first: 1000
+    ) {
+      id
+      collateralToken
+      outcomeTokenMarginalPrice
+      oldOutcomeTokenMarginalPrice
+      type
+      collateralAmount
+      collateralAmountUSD
+      feeAmount
+      outcomeIndex
+      outcomeTokensTraded
+      transactionHash
+      fpmm {
+        id
+        outcomes
+        title
+        answerFinalizedTimestamp
+        currentAnswer
+        isPendingArbitration
+        arbitrationOccurred
+        openingTimestamp
+        condition {
+          id
+        }
+      }
+    }
+  }
+
+  query UserPositions ($creator: ID!) {
+   user(id: $creator) {
+      userPositions(
+        first: 1000
+        orderBy: id
+      ) {
+        balance
+        id
+        position {
+          id
+          conditionIds
+        }
+        totalBalance
+        wrappedBalance
+      }
+    }
+  }
+

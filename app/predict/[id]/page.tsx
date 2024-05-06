@@ -1,10 +1,10 @@
 'use client'
 import React, { useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import { TradesDocument, TradesQuery, execute } from '@/.graphclient'
 import Image from "next/image"
 import { Check, CircleOff } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { weiToXdai } from '@/lib/utils'
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -12,25 +12,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { getBuiltGraphSDK } from '@/.graphclient'
 import { Separator } from '@/components/ui/separator'
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { Stats } from '@/components/stats'
+
+
+const sdk = getBuiltGraphSDK()
 
 
 function App() {
   const { id } = useParams()
-//   const [data, setData] = React.useState<TradesQuery>()
   const [addressBalance, setAddressBalance] = React.useState<string>()
   const creator = String(id).toLowerCase();
-  const [tradesPerPage] = React.useState(10);
+  // const [tradesPerPage] = React.useState(10);
   
 
   const jan2024 = new Date('2024-01-01T00:00:00Z').getTime();  
   const today = new Date().getTime();
   
-  const weiToXdai = (wei: bigint): string => {
-    const xdai = Number(wei) / 1e18; // Convert wei to xDAI
-    return `${xdai.toFixed(2)} xDAI`;
-  }
+
 
   const fetchTotalInvestment = (trades: any) => {
     console.log(trades)
@@ -111,29 +112,59 @@ function App() {
   };
 
   const fetchTrades = async ({ pageParam = 0 }) => {
-    const result = await execute(TradesDocument, {
-      creator: creator,
-      fromTimestamp: BigInt(Math.floor(jan2024 / 1000)).toString(),
-      toTimestamp: BigInt(Math.floor(today / 1000)).toString(),
-      first: tradesPerPage,
-      skip: pageParam,
-    });
-    console.log(result)
-    return result.data;
+    const result = await sdk.Trades({
+        creator: creator, 
+        fromTimestamp: BigInt(Math.floor(jan2024 / 1000)).toString(), 
+        toTimestamp: BigInt(Math.floor(today / 1000)).toString(), 
+        first: 10, 
+        skip: pageParam
+    })
+    return result
+    // const result = await execute(TradesDocument, {
+    //   creator: creator,
+    //   fromTimestamp: BigInt(Math.floor(jan2024 / 1000)).toString(),
+    //   toTimestamp: BigInt(Math.floor(today / 1000)).toString(),
+    //   first: 10,
+    //   skip: pageParam,
+    // });
+    // console.log(result)
+    // return result.data;
   };
+  
 
   const {
     data,
+    error,
     fetchNextPage,
     hasNextPage,
-    status,
+    isFetching,
     isFetchingNextPage,
-  } = useInfiniteQuery('trades', fetchTrades, {
-    getNextPageParam: (lastPage, pages) => {
-        const nextOffset = pages.length * tradesPerPage;
-        return lastPage.fpmmTrades.length === tradesPerPage ? nextOffset : undefined;
-      },
-  });
+    status,
+  } = useInfiniteQuery({
+    queryKey: ['trades'],
+    queryFn: ({ pageParam }) => fetchTrades({ pageParam }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
+      return lastPage.fpmmTrades.length === 10 ? allPages.length * 10 : undefined;
+    }
+  })
+
+
+  // const {
+  //   data,
+  //   fetchNextPage,
+  //   hasNextPage,
+  //   status,
+  //   isFetchingNextPage,
+  // } = useInfiniteQuery({
+  //     queryKey: ['trades'], 
+  //     queryFn: fetchTrades, 
+  //     getNextPageParam: (lastPage, pages) => {
+  //       const nextOffset = pages.length * 10;
+  //       return lastPage.fpmmTrades.length === 10 ? nextOffset : undefined;
+  //     },
+  //     initialPageParam: 0
+  // });
 
 
   useEffect(() => {
@@ -142,7 +173,7 @@ function App() {
 
   const trades = data?.pages.flatMap((page) => page.fpmmTrades) || [];
 
-  return status === 'loading' ? (
+  return status === 'pending' ? (
     <p>Loading...</p>
   ) : status === 'error' ? (
     <p>Error</p>
@@ -174,32 +205,7 @@ function App() {
             </div>
           </div>
           <div>
-            {/* <div className=''>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Summary</CardTitle>
-                </CardHeader>
-                <CardContent>
-                <div className='flex justify-between'>
-                  <div className=' w-full flex border-l border-border px-12  place-content-center  flex-col gap-3'>
-                    <div className='flex flex-col gap-0'>
-                      <span className='font-bold'>{fetchTotalInvestment(data)}</span> <span className='uppercase text-xs text-muted-foreground'>Total Investement</span>
-                    </div>
-                    <div className='flex flex-col gap-0'>
-                      <span className='font-bold'>3.43 xDAI</span> <span className='uppercase text-xs text-muted-foreground'>Successfull Trades</span>
-                    </div>
-                    <div className='flex flex-col gap-0'>
-                      <span className='font-bold'>{fetchNetEarnings(data)}</span> <span className='uppercase text-xs text-muted-foreground'>Net Earnings</span>
-                    </div>
-                    <div className='flex flex-col gap-0'>
-                      <span className='font-bold'>20%</span> <span className='uppercase text-xs text-muted-foreground'>ROI</span>
-                    </div>
-
-                  </div>
-                </div>
-                </CardContent>
-              </Card>
-            </div> */}
+            <Stats id={creator} jan2024={jan2024} today={today} />
           </div>
           <div className='mt-6 my-4 text-xs text-muted-foreground uppercase tracking-wider pb-2 border-b border-border'>Trades</div>
             <div className='flex flex-col gap-3'>
@@ -220,7 +226,7 @@ function App() {
                       <div className='flex items-center gap-10 '>
                         <div className='flex flex-col gap-1'>
                           <div className='flex items-center gap-2'>
-                            {trade.fpmm.outcomes[trade.outcomeIndex] == 'Yes' ? 
+                            {trade.fpmm.outcomes && trade.fpmm.outcomes[trade.outcomeIndex] == 'Yes' ? 
                             <div className='flex items-center gap-2'>
                               <Check className="w-4 h-4 text-green-500" />
                               <span className='font-bold text-green-500'>Yes</span>
@@ -297,5 +303,6 @@ function App() {
     )
   
 }
+
 
 export default App
