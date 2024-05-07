@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import Image from "next/image"
 import { Check, CircleOff } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { weiToXdai } from '@/lib/utils'
@@ -23,7 +22,6 @@ const sdk = getBuiltGraphSDK()
 
 function App() {
   const { id } = useParams()
-  const [addressBalance, setAddressBalance] = React.useState<string>()
   const creator = String(id).toLowerCase();
   // const [tradesPerPage] = React.useState(10);
   
@@ -47,29 +45,6 @@ function App() {
     }
   }
 
-  const fetchNetEarnings = (trades: any) => {
-    try {
-       
-        let totalInvestment = 0;
-        let totalFees = 0;
-        let totalEarnings = 0;
-
-        trades.fpmmTrades.forEach((trade: { collateralAmount: string; feeAmount: string; outcomeTokensTraded: string }) => {
-            const collateralAmount = parseInt(trade.collateralAmount);
-            const feeAmount = parseInt(trade.feeAmount);
-            const earnings = parseInt(trade.outcomeTokensTraded); // Simplified assumption
-
-            totalInvestment += collateralAmount;
-            totalFees += feeAmount;
-            totalEarnings += earnings;
-        });
-
-        const netEarnings = totalEarnings - (totalInvestment + totalFees);
-        return weiToXdai(BigInt(netEarnings))
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
 
   const market_status = function(market: any) {
     const utcOpeningTimestamp = new Date(market.fpmm.openingTimestamp * 1000).getTime();
@@ -91,25 +66,6 @@ function App() {
       return "Exception"
     }
   }
-
-  const fetchAccountBalance = async () => {
-    const apiKey = process.env.GNOSIS_API_KEY;
-    const accountAddress = creator;
-    const url = `https://api.gnosisscan.io/api?module=account&action=balance&address=${accountAddress}&tag=latest&apikey=${apiKey}`;
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      if (data.status === '1') {
-        const addressBalance = weiToXdai(data.result)
-        return setAddressBalance(addressBalance)
-      } else {
-        console.error('Failed to fetch balance:', data.message);
-      }
-    } catch (error) {
-      console.error('Error fetching account balance:', error);
-    }
-  };
 
   const fetchTrades = async ({ pageParam = 0 }) => {
     const result = await sdk.Trades({
@@ -167,9 +123,7 @@ function App() {
   // });
 
 
-  useEffect(() => {
-    fetchAccountBalance();
-  }, [setAddressBalance]);
+
 
   const trades = data?.pages.flatMap((page) => page.fpmmTrades) || [];
 
@@ -182,31 +136,7 @@ function App() {
     {data && (
       <div className="App p-2 md:p-0">
         <div className='max-w-screen-md mx-auto md:my-6'>
-          <div className='h-60 rounded-md bg-muted-foreground bg-center' style={{backgroundImage: 'url("/coastal.webp")'}}>
-          </div>
-          <div className='md:-mt-12 px-6 mb-8 flex-col md:flex-row flex items-center gap-6'>
-            <div className='w-40 h-40 -mt-12 md:mt-0 border-2 border-background rounded-full bg-muted-foreground'>
-              <Image src="/416.png" alt="avatar" className="rounded-full" width={160} height={160} />
-            </div>
-            <div className='flex md:mt-10 text-center md:text-left flex-col gap-1'>
-              <span className='font-bold text-xl'>Trader Agent</span>
-              <span className='text-xs uppercase tracking-wider text-muted-foreground'>
-                Safe address: {creator}
-              </span>
-              <div className='flex items-center mt-1 gap-3'>
-                <span className='text-sm'>
-                  <span className='font-bold'>{addressBalance}</span> <span className='text-muted-foreground'>Address Balance</span>
-                </span>
-                {/* <span>·</span>
-                <span className='text-sm'>
-                  <span className='font-bold'>ToDo WxDAI</span> <span className='text-muted-foreground'>Token Balance</span>
-                </span> */}
-              </div>
-            </div>
-          </div>
-          <div>
             <Stats id={creator} jan2024={jan2024} today={today} />
-          </div>
           <div className='mt-6 my-4 text-xs text-muted-foreground uppercase tracking-wider pb-2 border-b border-border'>Trades</div>
             <div className='flex flex-col gap-3'>
               {trades.map((trade, i) => (
@@ -248,10 +178,10 @@ function App() {
                           <div className='flex flex-col gap-1'>
                           <div>
                           {trade.fpmm.outcomes && (
-  <Badge className='inline'>
-    {trade.fpmm.outcomes}
-  </Badge>
-)}
+                              <Badge className='inline'>
+                                {trade.fpmm.outcomes[trade.outcomeIndex]}
+                              </Badge>
+                            )}
                           </div>
                           <span className='text-xs uppercase tracking-wider text-muted-foreground'>
                             Final result

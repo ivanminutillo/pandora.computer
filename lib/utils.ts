@@ -67,12 +67,34 @@ interface TradeMetrics {
   winnerTradesPercentage: number;
   totalRedemptions: number;
   totalEarnings: number;
+  totalEarningAmount: number;
+  netEarningAmount: number;
   winnerTrades: number;
   totalInvestment: number;
   totalFees: number;
   roi: number;
 }
 
+function is_redeemed(user_json: any, fpmmTrade: any): boolean {
+  const redemptions = user_json.data.redeems;
+  const collateralToken = fpmmTrade.collateralToken;
+  const feeAmount = BigInt(fpmmTrade.feeAmount);
+  const collateralAmount = BigInt(fpmmTrade.collateralAmount);
+  const outcomeTokensTraded = BigInt(fpmmTrade.outcomeTokensTraded);
+
+  for (const redemption of redemptions) {
+    if (
+      redemption.collateralToken === collateralToken &&
+      BigInt(redemption.feeAmount) === feeAmount &&
+      BigInt(redemption.collateralAmount) === collateralAmount &&
+      BigInt(redemption.payoutAmount) === outcomeTokensTraded
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 export function getTradeMetrics(trades: any[]): TradeMetrics {
   const tradeMetrics: TradeMetrics = {
@@ -83,6 +105,8 @@ export function getTradeMetrics(trades: any[]): TradeMetrics {
     totalInvestment: 0,
     totalFees: 0,
     roi: 0,
+    totalEarningAmount: 0,
+    netEarningAmount: 0,
   };
 
   let winnerTrades = 0;
@@ -90,33 +114,55 @@ export function getTradeMetrics(trades: any[]): TradeMetrics {
 
   for (const trade of trades) {
     const marketState = getMarketState(trade);
-    // console.log(trade)
-    // console.log(marketState)
+
+    if (marketState === MarketState.FINALIZING) {
+            totalTrades++;
+            
+            const currentAnswer = parseInt(trade.fpmm.currentAnswer!, 16);
+            const isInvalid = currentAnswer === Number(INVALID_ANSWER);
+            
+            if (isInvalid) {
+              tradeMetrics.totalEarnings += parseInt(trade.collateralAmount);
+            } else if (Number(trade.outcomeIndex) === Number(currentAnswer)) {
+        winnerTrades++;
+        tradeMetrics.totalEarnings += parseInt(trade.outcomeTokensTraded);
+      } else {
+        tradeMetrics.totalEarnings += 0
+      }
+    }
     if (marketState === MarketState.CLOSED) {
-      // console.log("qui")
       totalTrades++;
       const currentAnswer = parseInt(trade.fpmm.currentAnswer!, 16);
       const isInvalid = currentAnswer === Number(INVALID_ANSWER);
-
-      if (!isInvalid && Number(trade.outcomeIndex) === Number(currentAnswer)) {
-       winnerTrades++;
+      if (isInvalid) {
+        tradeMetrics.totalEarnings += parseInt(trade.collateralAmount);
+      } else if (!isInvalid && Number(trade.outcomeIndex) === Number(currentAnswer)) {
+        winnerTrades++;
         const redemption = parseInt(trade.outcomeTokensTraded);
         tradeMetrics.totalRedemptions += redemption;
         tradeMetrics.totalEarnings += redemption;
-      } else {
-        const investment = parseInt(trade.collateralAmount);
-        tradeMetrics.totalEarnings -= investment;
+
+        // tradeMetrics.totalEarningAmount += parseFloat(trade.collateralAmountUSD);
+      // } else {
+      //   const investment = parseInt(trade.collateralAmount);
+      //   tradeMetrics.totalEarnings -= investment;
+      // }
       }
     }
-    tradeMetrics.totalInvestment += parseInt(trade.collateralAmount);
     tradeMetrics.totalFees += parseInt(trade.feeAmount);
+    tradeMetrics.totalInvestment += parseInt(trade.collateralAmount);
+    
   }
   tradeMetrics.winnerTrades = winnerTrades;
   tradeMetrics.winnerTradesPercentage = totalTrades !== 0 ? (winnerTrades / totalTrades * 100) : 0;
+  tradeMetrics.totalInvestment -= tradeMetrics.totalFees;
   tradeMetrics.roi =
-    tradeMetrics.totalInvestment !== 0
-      ? (tradeMetrics.totalEarnings - tradeMetrics.totalInvestment) / tradeMetrics.totalInvestment
-      : 0;
-
+  tradeMetrics.totalInvestment !== 0
+  ? ((tradeMetrics.totalEarnings - tradeMetrics.totalInvestment) / tradeMetrics.totalInvestment) * 100
+  : 0;
+  
+  tradeMetrics.netEarningAmount = tradeMetrics.totalEarningAmount - (tradeMetrics.totalInvestment + tradeMetrics.totalFees)  ;
+  
+  console.log(tradeMetrics)
   return tradeMetrics;
 }

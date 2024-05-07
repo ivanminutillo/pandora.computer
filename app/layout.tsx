@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Wrapper from "@/components/wrapper";
 import {Header} from "@/components/header"
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +21,13 @@ export default function RootLayout({
     <html lang="en">
       <body className="h-full bg-muted/40">
         <Header />
-        <Wrapper>
-          {children}
-        </Wrapper>
+          <Wrapper>
+            {children}
+          </Wrapper>
+          <Toaster />
+
       </body>
+      
     </html>
   );
 }

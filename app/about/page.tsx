@@ -1,12 +1,14 @@
 'use client'
 import React from "react"
+import Image from "next/image"
 
 function App() {
   
   return (
-    <main className="max-w-screen-md mx-auto my-12">
+    <main className="max-w-screen-md mx-4 md:mx-auto my-12">
       <div className="prose prose-md">
-        <h2>About Pandora</h2>
+        <h2>A UX Exploration of Multi Agents Systems</h2>
+        <Image className="w-full" src="/bg.png" alt="Pandora"  width={1200} height={350} />
       <p>Imagine if the majority of your team were composed of autonomous agents. <br/>
     Autonomous agents are software entities that leverage specific skills and behaviors to autonomously understand and interact in their environment. Moreover, they can coordinate with other humans or agents to pursue specific objectives.</p>
 
