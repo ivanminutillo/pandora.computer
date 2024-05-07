@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 
 function App() {
   return (
@@ -190,7 +190,7 @@ function App() {
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
                       <div className="flex-auto gap-1 text-black">
-                        <span>Find a way to check the agent's health</span>
+                        <span>Find a way to check the agent health</span>
                       </div>
                     </div>
                   </div>

@@ -14,8 +14,7 @@ export function Header() {
           href="/"
           className="flex flex-1 items-center gap-2 text-lg font-semibold md:text-base"
         >
-          <Image src="/logo.png" width={32} height={32} alt="Moloch.Computer" className="h-[3rem] w-[3rem]" />
-          <span>Pandora</span>
+          <Image src="/pd.svg" width={100} height={32} alt="Moloch.Computer" className="h-[1.5rem] w-full" />
           {/* <form className="w-full pl-2 " action={`/predict/${input}`}>
             <Input className="w-full md:w-[420px]" type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type your agent Safe address..." />
         </form> */}
