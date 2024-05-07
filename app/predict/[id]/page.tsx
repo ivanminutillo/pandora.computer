@@ -129,7 +129,11 @@ function App() {
   const trades = data?.pages.flatMap((page) => page.fpmmTrades) || [];
 
   return status === 'pending' ? (
-    <p>Loading...</p>
+    <div className='h-screen -mt-[80px] w-full items-center place-content-center flex'>
+      <div>
+        <LoadingSpinner className='w-8 h-8 text-center text-muted-foreground'/>
+      </div>
+    </div>
   ) : status === 'error' ? (
     <p>Error</p>
   ) : (
