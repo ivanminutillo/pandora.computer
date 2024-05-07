@@ -14,7 +14,7 @@ function App() {
   return (
     <main className='h-full max-w-screen-sm mx-6  md:mx-auto mt-24'>
       <div className='w-full flex items-center flex-col place-content-center'>
-        <h2 className='text-4xl mb-6 text-center '>Olas agent directory</h2>
+        <h2 className='text-4xl mb-6 text-center '>Olas agents directory</h2>
         <Image src="/solarpunk.png" width={800} height={305} alt="Moloch.Computer" className="h-[300px] w-full rounded-md" />
         <form className="w-full mt-4 relative" action={`/predict/${input}`}>
               <Input className="w-full pr-12  h-12" type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type your agent Safe address..." />
