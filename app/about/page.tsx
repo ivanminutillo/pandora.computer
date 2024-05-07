@@ -126,7 +126,7 @@ function App() {
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
-                      <div className="flex-auto gap-1 text-black">
+                      <div className="flex-auto gap-1 ">
                         <span>Display the ROI for closed markets</span>
                       </div>
                     </div>
@@ -137,7 +137,7 @@ function App() {
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
-                      <div className="flex-auto gap-1 text-black">
+                      <div className="flex-auto gap-1 ">
                         <span>Show Staking data</span>
                       </div>
                     </div>
@@ -149,7 +149,7 @@ function App() {
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
-                      <div className="flex-auto gap-1 text-black">
+                      <div className="flex-auto gap-1 ">
                         <span>Add info about Mech tools used for each trade</span>
                       </div>
                     </div>
@@ -167,7 +167,7 @@ function App() {
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
-                      <div className="flex-auto gap-1 text-black">
+                      <div className="flex-auto gap-1 ">
                         <span>Publish the dashboard as a custom component to be serve locally</span>
                       </div>
                     </div>
@@ -178,7 +178,7 @@ function App() {
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
-                      <div className="flex-auto gap-1 text-black">
+                      <div className="flex-auto gap-1 ">
                         <span>Add a button in the agent dashboard to start staking</span>
                       </div>
                     </div>
@@ -189,7 +189,7 @@ function App() {
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
-                      <div className="flex-auto gap-1 text-black">
+                      <div className="flex-auto gap-1 ">
                         <span>Find a way to check the agent health</span>
                       </div>
                     </div>
@@ -200,7 +200,7 @@ function App() {
                       <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
-                      <div className="flex-auto gap-1 text-black">
+                      <div className="flex-auto gap-1 ">
                         <span>Show the list of most performant agents per typology</span>
                       </div>
                     </div>

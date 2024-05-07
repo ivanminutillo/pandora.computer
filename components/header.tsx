@@ -2,23 +2,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import { ModeToggle } from "./toggle_theme";
+import { buttonVariants } from "@/components/ui/button";
 
 export function Header() {
   const [input, setInput] = useState("");
     return (
     <header className="sticky relative top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <nav className="flex-col relative z-20 gap-6 text-lg font-medium flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+      <nav className="relative z-20 gap-3 w-full text-lg font-medium flex md:flex-row md:items-center md:text-sm">
         <Link
+          className={buttonVariants({ variant: "outline" })}
           href="/"
-          className="flex flex-1 items-center gap-2 text-lg font-semibold md:text-base"
         >
-          <Image src="/logo.png" width={32} height={32} alt="Moloch.Computer" className="h-[3rem] w-[3rem]" />
-          {/* <form className="w-full pl-2 " action={`/predict/${input}`}>
-            <Input className="w-full md:w-[420px]" type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type your agent Safe address..." />
-        </form> */}
+          ✨💻🌪
         </Link>
+          <form className="w-full" action={`/predict/${input}`}>
+            <Input className="w-full md:w-[320px]" type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type your Olas agent Safe address..." />
+        </form>
         {/* Add a search bar that takes the input value and redirect to /predict/[id] */}
         
       </nav>

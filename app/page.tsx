@@ -12,11 +12,11 @@ function App() {
   const [input, setInput] = useState("");
 
   return (
-    <main className='h-full max-w-screen-sm mx-auto mt-24'>
+    <main className='h-full max-w-screen-sm mx-6  md:mx-auto mt-24'>
       <div className='w-full flex items-center flex-col place-content-center'>
-        <Image src="/logo.png" width={124} height={124} alt="Moloch.Computer" className="h-[180px] w-[180px]" />
-        <h2 className='text-4xl my-6 text-center '>Find your agent</h2>
-        <form className="w-full relative" action={`/predict/${input}`}>
+        <h2 className='text-4xl mb-6 text-center '>Olas agent directory</h2>
+        <Image src="/solarpunk.png" width={800} height={305} alt="Moloch.Computer" className="h-[300px] w-full rounded-md" />
+        <form className="w-full mt-4 relative" action={`/predict/${input}`}>
               <Input className="w-full pr-12  h-12" type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type your agent Safe address..." />
               <Button size="icon" type="submit" className="absolute right-1.5 top-1.5 ml-auto gap-1.5">
                 <CornerDownLeft className="size-3.5" />
