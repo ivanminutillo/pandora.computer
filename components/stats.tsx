@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { formatAddress } from 'ens-tools';
-import {Chart, DoughnutController, ArcElement} from 'chart.js'
+import {Chart, DoughnutController, ArcElement, Legend} from 'chart.js'
 import { Copy } from "lucide-react"
 import { useBalance } from 'wagmi'
 import { useToast } from "@/components/ui/use-toast"
@@ -26,7 +26,8 @@ export function SkeletonCard() {
 
 Chart.register(
   DoughnutController,
-  ArcElement
+  ArcElement,
+  Legend
 );
 
 interface StatsProps {
