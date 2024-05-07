@@ -18,10 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="h-full bg-muted/40">
-        <Header />
-          <Wrapper>
+          <Wrapper
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+            <Header />
             {children}
           </Wrapper>
           <Toaster />

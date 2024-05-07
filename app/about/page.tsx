@@ -29,7 +29,7 @@ function App() {
               <CardTitle>About Pandora</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="prose prose-md">
+              <div className="prose text-foreground prose-md">
                 <p>
                   Imagine if the majority of your team were composed of autonomous
                   agents. <br />
