@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
+import { buttonVariants } from "@/components/ui/button";
 
 function App() {
   return (
@@ -111,8 +112,8 @@ function App() {
                 <div className="space-y-2">
                   <div className="relative p-2">
                     <span className="flex top-5  h-3 w-3 -left-[33px] relative">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
                       <div className="flex-auto gap-1">
@@ -122,8 +123,8 @@ function App() {
                   </div>
                   <div className="b2 relative p-2">
                     <span className="flex top-5  h-3 w-3 -left-[33px] relative">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
                       <div className="flex-auto gap-1 ">
@@ -133,8 +134,8 @@ function App() {
                   </div>
                   <div className="b2 relative p-2">
                     <span className="flex top-5  h-3 w-3 -left-[33px] relative">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
                       <div className="flex-auto gap-1 ">
@@ -145,8 +146,8 @@ function App() {
                   
                   <div className="b2 relative p-2">
                     <span className="flex top-5  h-3 w-3 -left-[33px] relative">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
                     </span>
                     <div className="flex items-center gap-1 md:gap-3">
                       <div className="flex-auto gap-1 ">
@@ -202,6 +203,77 @@ function App() {
                     <div className="flex items-center gap-1 md:gap-3">
                       <div className="flex-auto gap-1 ">
                         <span>Show the list of most performant agents per typology</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mb-8 pl-4 md:pl-8">
+                <h2 className="text-xl mb-2 font-bold">Done</h2>
+                <div className="space-y-2">
+                  <div className="relative p-2">
+                    <span className="flex top-5  h-3 w-3 -left-[33px] relative">
+                      {/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span> */}
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <div className="flex items-center gap-1 md:gap-3">
+                      <div className="flex-auto gap-1 ">
+                        <span>Created <a href="https://warpcast.com/~/channel/pandora-computer" target="_blank" rel="noreferrer" className="underline">Warpcast</a> channel</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative p-2">
+                    <span className="flex top-5  h-3 w-3 -left-[33px] relative">
+                      {/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span> */}
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <div className="flex items-center gap-1 md:gap-3">
+                      <div className="flex-auto gap-1 ">
+                        <span>Added Light/Dark mode</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative p-2">
+                    <span className="flex top-5  h-3 w-3 -left-[33px] relative">
+                      {/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span> */}
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <div className="flex items-center gap-1 md:gap-3">
+                      <div className="flex-auto gap-1 ">
+                        <span>Added the About page</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative p-2">
+                    <span className="flex top-5  h-3 w-3 -left-[33px] relative">
+                      {/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <div className="flex items-center gap-1 md:gap-3">
+                      <div className="flex-auto gap-1 ">
+                        <span>Included initial statistics in the Agent dashboard</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="b2 relative p-2">
+                    <span className="flex top-5  h-3 w-3 -left-[33px] relative">
+                      {/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <div className="flex items-center gap-1 md:gap-3">
+                      <div className="flex-auto gap-1 ">
+                        <span>Included the possibility of searching Agents by SAFE address</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="b2 relative p-2">
+                    <span className="flex top-5  h-3 w-3 -left-[33px] relative">
+                      {/* <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span> */}
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <div className="flex items-center gap-1 md:gap-3">
+                      <div className="flex-auto gap-1 ">
+                        <span>Deploied initial version</span>
                       </div>
                     </div>
                   </div>
