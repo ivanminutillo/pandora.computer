@@ -4,16 +4,15 @@ import { useQuery } from '@tanstack/react-query'
 import { getBuiltGraphSDK } from '@/.graphclient'
 import { useMemo, useRef, useEffect } from 'react'
 import { getTradeStatistics, getTradeMetrics, weiToXdai } from '@/lib/utils'
-import { ChevronsUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { Badge } from "@/components/ui/badge"
 import { formatAddress } from 'ens-tools';
 import {Chart, DoughnutController, ArcElement, Legend} from 'chart.js'
 import { Copy } from "lucide-react"
 import { useBalance } from 'wagmi'
 import { useToast } from "@/components/ui/use-toast"
 import { Skeleton } from "@/components/ui/skeleton"
+// import StakingBox from "./staking_box"
 
 export function SkeletonCard() {
   return (
@@ -154,6 +153,7 @@ export function Stats({ id, jan2024, today }: StatsProps) {
   return (
     
     <div className="grid md:grid-cols-4 grid-cols-1 gap-2">
+      {/* <StakingBox id={id} /> */}
       <Card className="col-span-2">
         <CardHeader>
           <CardTitle>Trader Agent details</CardTitle>

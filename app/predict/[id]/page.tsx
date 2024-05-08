@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useParams } from 'next/navigation'
 import { Check, CircleOff, PartyPopper, Frown } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -30,21 +30,6 @@ function App() {
   const jan2024 = new Date('2024-01-01T00:00:00Z').getTime();  
   const today = new Date().getTime();
   
-
-
-  const fetchTotalInvestment = (trades: any) => {
-    console.log(trades)
-    try {
-      let totalInvestment = 0;
-      trades.fpmmTrades.forEach((trade: { collateralAmount: string }) => {
-          totalInvestment += parseInt(trade.collateralAmount);
-      });
-      console.log(totalInvestment)
-      return weiToXdai(BigInt(totalInvestment))
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-  }
 
 
   const market_status = function(market: any) {

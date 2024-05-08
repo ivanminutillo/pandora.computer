@@ -6,7 +6,6 @@ import { WagmiProvider } from 'wagmi'
 import { config } from '../config' 
 import { useState } from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes"
-import { type ThemeProviderProps } from "next-themes/dist/types"
 
 const ReactQueryProvider = ({ children, attribute, defaultTheme, enableSystem, disableTransitionOnChange }: { children: React.ReactNode, attribute: string, defaultTheme: string, enableSystem: boolean, disableTransitionOnChange: boolean }) => {
   const [queryClient] = useState(() => new QueryClient());

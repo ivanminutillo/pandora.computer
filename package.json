@@ -50,6 +50,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-table": "^7.7.20",
+    "@wagmi/cli": "^2.1.4",
     "eslint": "^8",
     "eslint-config-next": "14.2.2",
     "node-loader": "^2.0.0",

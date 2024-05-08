@@ -4,6 +4,8 @@ import Wrapper from "@/components/wrapper";
 import {Header} from "@/components/header"
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
+import { Button } from "@/components/ui/button";
+import { Footer } from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html className="" lang="en" suppressHydrationWarning>
       <body className="h-full bg-muted/40">
           <Wrapper
               attribute="class"
@@ -27,7 +29,10 @@ export default function RootLayout({
               disableTransitionOnChange
             >
             <Header />
-            {children}
+            <main className="flex-1 h-full">
+              {children}
+              <Footer />
+            </main>
           </Wrapper>
           <Toaster />
 

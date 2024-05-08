@@ -8,7 +8,7 @@ import { buttonVariants } from "@/components/ui/button";
 export function Header() {
   const [input, setInput] = useState("");
     return (
-    <header className="sticky relative top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky relative z-50 top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="relative z-20 gap-3 w-full text-lg font-medium flex md:flex-row md:items-center md:text-sm">
         <Link
           className={buttonVariants({ variant: "outline" })}

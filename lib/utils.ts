@@ -166,3 +166,19 @@ export function getTradeMetrics(trades: any[]): TradeMetrics {
   console.log(tradeMetrics)
   return tradeMetrics;
 }
+
+
+export const copyToClipboard = async (id: string, toast: any) => {
+  try {
+    await navigator.clipboard.writeText(id);
+    toast({
+      title: "Address copied"
+    })
+    // Optionally, you can add a notification to inform the user that the address has been copied.
+  } catch (err) {
+    toast({
+      title: "Failed to copy address"
+    })
+    // Handle errors here, such as displaying a notification to the user.
+  }
+};
