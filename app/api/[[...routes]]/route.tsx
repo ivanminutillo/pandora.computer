@@ -102,11 +102,11 @@ app.frame("/", async (c) => {
       </div>
     ),
     intents: [
-      <TextInput placeholder="Enter your agent Safe address..." />,
-      <Button action="/performance" value={inputText}>
+      <TextInput key="input" placeholder="Enter your agent Safe address..." />,
+      <Button key="button" action="/performance" value={inputText}>
         Get Performance
       </Button>,
-      <Button.Link href="https://pandora.computer">
+      <Button.Link key="link" href="https://pandora.computer">
         Visit Dashboard
       </Button.Link>,
     ],
