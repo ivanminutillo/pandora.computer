@@ -4,7 +4,6 @@ import Wrapper from "@/components/wrapper";
 import {Header} from "@/components/header"
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
-import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -163,7 +163,6 @@ export function getTradeMetrics(trades: any[]): TradeMetrics {
   
   tradeMetrics.netEarningAmount = tradeMetrics.totalEarningAmount - (tradeMetrics.totalInvestment + tradeMetrics.totalFees)  ;
   
-  console.log(tradeMetrics)
   return tradeMetrics;
 }
 
