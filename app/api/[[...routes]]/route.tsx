@@ -182,10 +182,10 @@ app.frame("/performance", async (c) => {
       </div>
     ),
     intents: [
-      <Button action="/">
+      <Button key="back" action="/">
         Back
       </Button>,
-      <Button.Link href={`https://pandora.computer/predict/${inputText}`}>
+      <Button.Link key="dashboard" href={`https://pandora.computer/predict/${inputText}`}>
         View Agent Dashboard
       </Button.Link>,
     ],
