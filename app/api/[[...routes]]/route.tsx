@@ -46,7 +46,7 @@ async function fetchOmenXDaiTrades(creator: string): Promise<any[]> {
   const variables = {
     creator,
   };
-  const data = await request(
+  const data:any = await request(
     OMEN_XDAI_SUBGRAPH_URL,
     OMEN_XDAI_TRADES_QUERY,
     variables
