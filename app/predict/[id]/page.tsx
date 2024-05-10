@@ -62,15 +62,6 @@ function App() {
         skip: pageParam
     })
     return result
-    // const result = await execute(TradesDocument, {
-    //   creator: creator,
-    //   fromTimestamp: BigInt(Math.floor(jan2024 / 1000)).toString(),
-    //   toTimestamp: BigInt(Math.floor(today / 1000)).toString(),
-    //   first: 10,
-    //   skip: pageParam,
-    // });
-    // console.log(result)
-    // return result.data;
   };
   
 

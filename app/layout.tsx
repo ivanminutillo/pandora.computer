@@ -5,12 +5,20 @@ import {Header} from "@/components/header"
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import { Footer } from "@/components/footer";
+// import { fetchMetadata } from "frames.js/next";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Pandora Computer",
   description: "Experimenting in MAS",
+  // other: {
+  //     // ...
+  //     ...(await fetchMetadata(
+  //       // provide full URL to your /frames endpoint
+  //       new URL("/frames", process.env.VERCEL_URL || "http://localhost:3000")
+  //     )),
+  //   }
 };
 
 export default function RootLayout({
