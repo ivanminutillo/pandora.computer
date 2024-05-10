@@ -100,7 +100,7 @@ const handleRequest = frames(async () => {
         // With query params
         <Button
           action="post"
-          target={{ pathname: "/frames/performance", query: { foo: "bar" } }}
+          target={{ pathname: "/frames/performance", query: { address: "text" } }}
         >
           Get Performance
         </Button>,
