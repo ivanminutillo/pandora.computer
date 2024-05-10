@@ -1,63 +1,10 @@
 /* eslint-disable react/jsx-key */
 import { createFrames, Button } from "frames.js/next";
-import { request, gql } from "graphql-request";
-import { getTradeStatistics, getTradeMetrics } from "@/lib/utils";
-import { weiToXdai } from "@/lib/utils";
 
-const OMEN_XDAI_SUBGRAPH_URL =
-  "https://api.thegraph.com/subgraphs/name/protofire/omen-xdai";
+import { frames } from "../frames";
 
-const OMEN_XDAI_TRADES_QUERY = gql`
-  query ($creator: String!) {
-    fpmmTrades(
-      where: { type: Buy, creator: $creator }
-      first: 1000
-      orderDirection: desc
-    ) {
-      id
-      collateralToken
-      outcomeTokenMarginalPrice
-      oldOutcomeTokenMarginalPrice
-      collateralAmount
-      collateralAmountUSD
-      feeAmount
-      outcomeIndex
-      outcomeTokensTraded
-      fpmm {
-        id
-        outcomes
-        answerFinalizedTimestamp
-        currentAnswer
-        isPendingArbitration
-        arbitrationOccurred
-        openingTimestamp
-        condition {
-          id
-        }
-      }
-    }
-  }
-`;
-
-async function fetchOmenXDaiTrades(creator: string): Promise<any[]> {
-  const variables = {
-    creator,
-  };
-  const data:any = await request(
-    OMEN_XDAI_SUBGRAPH_URL,
-    OMEN_XDAI_TRADES_QUERY,
-    variables
-  );
-  return data;
-}
-
-
-const frames = createFrames({
-  basePath: "/frames",
-});
-
-const handleRequest = frames(async () => {
-  return {
+export const GET = frames(async () => {
+    return {
     image: (
         <div
         style={{
@@ -99,8 +46,8 @@ const handleRequest = frames(async () => {
     buttons: [
         // With query params
         <Button
-          action="post"
-          target={{ pathname: "/frames/performance", query: { address: "text" } }}
+            action="post"
+          target="/performance"
         >
           Get Performance
         </Button>,
@@ -112,5 +59,3 @@ const handleRequest = frames(async () => {
   };
 });
  
-export const GET = handleRequest;
-export const POST = handleRequest;
